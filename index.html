@@ -52,7 +52,7 @@
     padding: 2rem 1rem 4rem;
   }
 
-  .container {
+ .container {
     width: 100%;
     max-width: 680px;
   }
@@ -74,7 +74,7 @@
     color: var(--text2);
   }
 
-  .card {
+ .card {
     background: var(--surface);
     border: 0.5px solid var(--border);
     border-radius: var(--radius-lg);
@@ -106,8 +106,8 @@
 
   #drop-zone svg { margin-bottom: 10px; color: var(--text2); }
 
-  #drop-zone .title { font-size: 15px; font-weight: 500; margin-bottom: 4px; }
-  #drop-zone .sub { font-size: 13px; color: var(--text2); }
+  #drop-zone.title { font-size: 15px; font-weight: 500; margin-bottom: 4px; }
+  #drop-zone.sub { font-size: 13px; color: var(--text2); }
 
   #file-info {
     display: none;
@@ -121,12 +121,12 @@
     border: 0.5px solid var(--border);
   }
 
-  #file-info .name { font-weight: 500; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  #file-info .size { color: var(--text2); flex-shrink: 0; }
+  #file-info.name { font-weight: 500; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  #file-info.size { color: var(--text2); flex-shrink: 0; }
 
-  .btn-row { display: flex; gap: 10px; }
+ .btn-row { display: flex; gap: 10px; }
 
-  .btn {
+ .btn {
     flex: 1; padding: 12px 20px;
     border-radius: var(--radius-md);
     font-size: 15px; font-weight: 500;
@@ -137,11 +137,11 @@
     font-family: inherit;
   }
 
-  .btn:disabled { opacity: 0.45; cursor: not-allowed; }
-  .btn:not(:disabled):hover { opacity: 0.88; }
-  .btn:not(:disabled):active { transform: scale(0.98); }
-  .btn-dark { background: var(--text); color: var(--bg); }
-  .btn-blue { background: var(--blue); color: #fff; }
+ .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+ .btn:not(:disabled):hover { opacity: 0.88; }
+ .btn:not(:disabled):active { transform: scale(0.98); }
+ .btn-dark { background: var(--text); color: var(--bg); }
+ .btn-blue { background: var(--blue); color: #fff; }
 
   #error-box {
     display: none; margin-top: 1rem; padding: 12px 16px;
@@ -155,7 +155,7 @@
     color: var(--text2); font-size: 14px; margin-top: 1rem;
   }
 
-  .dots::after {
+ .dots::after {
     content: ''; animation: dots 1.2s infinite;
   }
   @keyframes dots {
@@ -207,7 +207,7 @@
   }
 
   @media (max-width: 480px) {
-    .btn-row { flex-direction: column; }
+   .btn-row { flex-direction: column; }
     #drop-zone { padding: 1.8rem 1rem; }
   }
 </style>
@@ -275,8 +275,7 @@
 <script>
 pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
-// ← بعد ما تعمل الـ Worker، حط الرابط بتاعه هنا
-const WORKER_URL = 'https://shrill-bonus-18bb.zzyad0082-code.workers.dev';
+const WORKER_URL = 'https://pdf-ai-tool.pages.dev/functions/summarize';
 
 let pdfFile = null;
 let currentResult = '';
@@ -336,7 +335,7 @@ async function run(mode) {
   errorBox.style.display = 'none';
   resultBox.style.display = 'none';
   loader.style.display = 'block';
-  loaderText.textContent = mode === 'summary' ? 'جاري التلخيص' : 'جاري صنع الكويز';
+  loaderText.textContent = mode === 'summary'? 'جاري التلخيص' : 'جاري صنع الكويز';
 
   try {
     const text = await extractText(pdfFile);
@@ -345,7 +344,7 @@ async function run(mode) {
     }
 
     const prompt = mode === 'summary'
-      ? 'لخص النص ده في 5 نقاط مرقمة بالعربي، كل نقطة جملة واحدة أو اتنين واضحة ومفيدة.\n\n' + text
+     ? 'لخص النص ده في 5 نقاط مرقمة بالعربي، كل نقطة جملة واحدة أو اتنين واضحة ومفيدة.\n\n' + text
       : 'اعمل 10 أسئلة اختيار من متعدد MCQ من النص ده بالعربي. كل سؤال: اكتب السؤال ثم 4 اختيارات (أ، ب، ج، د) ثم الإجابة الصحيحة. افصل بين الأسئلة بسطر فاضي.\n\n' + text;
 
     const res = await fetch(WORKER_URL, {
@@ -364,7 +363,7 @@ async function run(mode) {
     currentResult = result;
 
     loader.style.display = 'none';
-    document.getElementById('result-label').textContent = mode === 'summary' ? '📋 الملخص' : '📝 الكويز';
+    document.getElementById('result-label').textContent = mode === 'summary'? '📋 الملخص' : '📝 الكويز';
     document.getElementById('result-content').textContent = result;
     resultBox.style.display = 'block';
     resultBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
