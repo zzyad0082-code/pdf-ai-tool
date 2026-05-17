@@ -1,0 +1,8 @@
+name = "pdf-ai-tool"
+main = "functions/summarize.js"
+compatibility_date = "2024-09-04"
+compatibility_flags = ["nodejs_compat"]
+
+[assets]
+directory = "./"
+binding = "ASSETS"
