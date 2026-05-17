@@ -352,8 +352,6 @@ async function run(mode) {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1500,
         system: 'أنت مساعد تعليمي ممتاز. اكتب بالعربي فقط. كن واضحاً ومنظماً.',
         messages: [{ role: 'user', content: prompt }]
       })
