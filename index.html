@@ -52,7 +52,7 @@
     padding: 2rem 1rem 4rem;
   }
 
- .container {
+.container {
     width: 100%;
     max-width: 680px;
   }
@@ -74,7 +74,7 @@
     color: var(--text2);
   }
 
- .card {
+.card {
     background: var(--surface);
     border: 0.5px solid var(--border);
     border-radius: var(--radius-lg);
@@ -124,9 +124,9 @@
   #file-info.name { font-weight: 500; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   #file-info.size { color: var(--text2); flex-shrink: 0; }
 
- .btn-row { display: flex; gap: 10px; }
+.btn-row { display: flex; gap: 10px; }
 
- .btn {
+.btn {
     flex: 1; padding: 12px 20px;
     border-radius: var(--radius-md);
     font-size: 15px; font-weight: 500;
@@ -137,11 +137,11 @@
     font-family: inherit;
   }
 
- .btn:disabled { opacity: 0.45; cursor: not-allowed; }
- .btn:not(:disabled):hover { opacity: 0.88; }
- .btn:not(:disabled):active { transform: scale(0.98); }
- .btn-dark { background: var(--text); color: var(--bg); }
- .btn-blue { background: var(--blue); color: #fff; }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.btn:not(:disabled):hover { opacity: 0.88; }
+.btn:not(:disabled):active { transform: scale(0.98); }
+.btn-dark { background: var(--text); color: var(--bg); }
+.btn-blue { background: var(--blue); color: #fff; }
 
   #error-box {
     display: none; margin-top: 1rem; padding: 12px 16px;
@@ -155,7 +155,7 @@
     color: var(--text2); font-size: 14px; margin-top: 1rem;
   }
 
- .dots::after {
+.dots::after {
     content: ''; animation: dots 1.2s infinite;
   }
   @keyframes dots {
@@ -207,7 +207,7 @@
   }
 
   @media (max-width: 480px) {
-   .btn-row { flex-direction: column; }
+  .btn-row { flex-direction: column; }
     #drop-zone { padding: 1.8rem 1rem; }
   }
 </style>
@@ -275,7 +275,7 @@
 <script>
 pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
-const WORKER_URL = 'https://pdf-ai-tool.pages.dev/functions/summarize';
+const WORKER_URL = 'https://pdf-ai-tool.zzyad0082.workers.dev/functions/summarize';
 
 let pdfFile = null;
 let currentResult = '';
@@ -344,7 +344,7 @@ async function run(mode) {
     }
 
     const prompt = mode === 'summary'
-     ? 'لخص النص ده في 5 نقاط مرقمة بالعربي، كل نقطة جملة واحدة أو اتنين واضحة ومفيدة.\n\n' + text
+    ? 'لخص النص ده في 5 نقاط مرقمة بالعربي، كل نقطة جملة واحدة أو اتنين واضحة ومفيدة.\n\n' + text
       : 'اعمل 10 أسئلة اختيار من متعدد MCQ من النص ده بالعربي. كل سؤال: اكتب السؤال ثم 4 اختيارات (أ، ب، ج، د) ثم الإجابة الصحيحة. افصل بين الأسئلة بسطر فاضي.\n\n' + text;
 
     const res = await fetch(WORKER_URL, {
